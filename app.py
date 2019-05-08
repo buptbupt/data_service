@@ -5,7 +5,7 @@ from flask import Flask, request
 from flask_sockets import Sockets
 from flask_compress import Compress
 from util.cache import cache
-from price.views import price_blueprint
+from price.views import price
 
 logging.basicConfig(level=logging.INFO, filename='app.log')
 
@@ -14,7 +14,7 @@ sockets = Sockets(app)
 cache.init_app(app)
 Compress(app)
 
-app.register_blueprint(price_blueprint, url_prefix="/price")
+sockets.register_blueprint(price, url_prefix="/price")
 
 
 
