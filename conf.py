@@ -1,0 +1,4 @@
+
+CACHE_REDIS_HOST = '172.17.0.6'
+
+SQLALCHEMY_DATABASE_URI = 'postgresql://root:19950403@172.17.0.4/data_service'
