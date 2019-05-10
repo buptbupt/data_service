@@ -5,7 +5,7 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_sockets import Sockets
 from flask_compress import Compress
 from util.cache import cache
-from price.views import price
+from price.views import price, price_ws
 from conf import *
 
 logging.basicConfig(level=logging.INFO, filename='app.log')
@@ -23,5 +23,5 @@ sockets.register_blueprint(price, url_prefix="/price")
 if __name__ == '__main__':
     from gevent import pywsgi
     from geventwebsocket.handler import WebSocketHandler
-    server = pywsgi.WSGIServer(('', 80), app, handler_class=WebSocketHandler)
+    server = pywsgi.WSGIServer(('', 8100), app, handler_class=WebSocketHandler)
     server.serve_forever()
