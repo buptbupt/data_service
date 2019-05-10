@@ -16,7 +16,7 @@ def input_price(socket):
 
 
 @price.route("/add_price", methods=["GET"])
-def get_price():
+def add_price():
     
     return APIResult(0)
 
