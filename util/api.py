@@ -39,4 +39,4 @@ class api_wrap(object):
             return res
         except:
             import traceback
-            return APIResult(1, msg=traceback.format_exc())
+            return APIResult(1, msg=traceback.format_exc()).jsonify()
