@@ -18,13 +18,14 @@ class Product(db.Model):
             product_name=self.product_name,
             product_code=self.product_code,
             product_price=self.product_price,
-            product_status=self.product_status
+            product_status=self.product_status,
+            product_class=self.product_class and self.product_class.product_class_name
         )
 
 
 class ProductClass(db.Model):
     id = db.Column(db.String(32), primary_key=True)
-    product_class_name = db.Column(db.String(32))
+    product_class_name = db.Column(db.JSON)
     product_class_level = db.Integer()
     product_list = db.relationship('Product', backref='product', lazy='dynamic')
 
