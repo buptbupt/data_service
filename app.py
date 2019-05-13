@@ -16,8 +16,8 @@ sockets = Sockets(app)
 cache.init_app(app)
 Compress(app)
 db.init_app(app)
-
-sockets.register_blueprint(price, url_prefix="/price")
+app.register_blueprint(price, url_prefix="/price")
+sockets.register_blueprint(price_ws, url_prefix="/price_ws")
 
 
 if __name__ == '__main__':
