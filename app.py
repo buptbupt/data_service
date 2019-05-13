@@ -6,6 +6,7 @@ from flask_compress import Compress
 from util.cache import cache
 from util.db import db
 from price.views import price, price_ws
+from product.views import product
 from conf import *
 
 logging.basicConfig(level=logging.INFO, filename='app.log')
@@ -17,6 +18,7 @@ cache.init_app(app)
 Compress(app)
 db.init_app(app)
 app.register_blueprint(price, url_prefix="/price")
+app.register_blueprint(product, url_prefix="/product")
 sockets.register_blueprint(price_ws, url_prefix="/price_ws")
 
 
