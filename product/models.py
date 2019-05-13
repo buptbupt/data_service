@@ -20,7 +20,7 @@ class ProductClass(db.Model):
     product_list = db.relationship('Product', backref='product', lazy='dynamic')
 
     product_class_parent_id = db.Column(db.String(32), db.ForeignKey('product_class.id'))
-    children = db.relationship("Node", backref=db.backref('parent', remote_side=[id]))
+    children = db.relationship("ProductClass", backref=db.backref('parent', remote_side=[id]))
 
     def __repr__(self):
         return '<ProductClass %r>' % self.id
