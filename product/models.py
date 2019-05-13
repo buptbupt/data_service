@@ -1,4 +1,4 @@
-from app import db
+from util.db import db
 
 class Product(db.Model):
     id = db.Column(db.String(32), primary_key=True)

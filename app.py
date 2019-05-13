@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
 import logging
 from flask import Flask, request
-from flask_sqlalchemy import SQLAlchemy
 from flask_sockets import Sockets
 from flask_compress import Compress
 from util.cache import cache
+from util.db import db
 from price.views import price, price_ws
 from conf import *
 
@@ -15,7 +15,7 @@ app.config['SQLALCHEMY_DATABASE_URI'] = SQLALCHEMY_DATABASE_URI
 sockets = Sockets(app)
 cache.init_app(app)
 Compress(app)
-db = SQLAlchemy(app)
+db.init_app(app)
 
 sockets.register_blueprint(price, url_prefix="/price")
 

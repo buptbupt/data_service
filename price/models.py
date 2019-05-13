@@ -1,4 +1,4 @@
-from app import db
+from util.db import db
 
 class Price(db.Model):
     id = db.Column(db.String(32), primary_key=True)
@@ -11,5 +11,5 @@ class Price(db.Model):
 
     def to_dict(self):
         return dict(
-            
+
         )
