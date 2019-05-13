@@ -3,7 +3,7 @@ import json
 from flask import request, Blueprint
 from price import ops
 from price.models import Price
-from util.api import APIResult
+from util.api import APIResult, api_wrap
 
 price = Blueprint("price", __name__)
 price_ws = Blueprint("price_ws", __name__)
@@ -14,17 +14,3 @@ def input_price(socket):
         data = socket.receive()
         socket.send(json.dumps({'code': 0, 'msg': 'success', 'data':{}}))
 
-
-@price.route("/add_price", methods=["GET"])
-def add_price():
-    
-    return APIResult(0)
-
-
-@price.route("/get_price", methods=["GET"])
-def get_price():
-    item = Price.query.get(request.args.to_dict().get('id'))
-    if item:
-        return APIResult(0, item.to_dict())
-    else:
-        return APIResult(1, msg='无此价格')
