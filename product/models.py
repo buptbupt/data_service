@@ -12,6 +12,14 @@ class Product(db.Model):
     def __repr__(self):
         return '<Product %r>' % self.id
 
+    def to_dict(self):
+        return dict(
+            product_name=self.product_name,
+            product_code=self.product_code,
+            product_price=self.product_price,
+            product_status=self.product_status
+        )
+
 
 class ProductClass(db.Model):
     id = db.Column(db.String(32), primary_key=True)

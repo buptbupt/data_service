@@ -12,5 +12,5 @@ def create_product(product_dict):
 def list_product(args):
     res = []
     for item in Product.query.limit(args.pop('num', 10)):
-        res.append(item.__dict__)
+        res.append(item.to_dict())
     return res
