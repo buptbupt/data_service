@@ -32,7 +32,11 @@ class api_wrap(object):
         return wrap
 
     def __call__(self, *arg, **kw):
-        res = self._func(*arg, **kw)
-        if isinstance(res, APIResult):
-            return res.jsonify()
-        return res
+        try:
+            res = self._func(*arg, **kw)
+            if isinstance(res, APIResult):
+                return res.jsonify()
+            return res
+        except:
+            import traceback
+            return APIResult(1, msg=traceback.format_exc())

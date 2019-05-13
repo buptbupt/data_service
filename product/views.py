@@ -8,15 +8,17 @@ from util.api import APIResult, api_wrap
 product = Blueprint("product", __name__)
 
 
+@product.route("/list_product", methods=["GET"])
+@api_wrap
+def list_product():
+    res = ops.list_product(request.args.to_dict() or {})
+    return APIResult(0, res)
 
-@product.route("/add_product", methods=["GET"])
+
+@product.route("/add_product", methods=["POST"])
 @api_wrap
 def add_product():
-    try:
-        ops.create_product(request.json or {})
-    except:
-        import traceback
-        return APIResult(1, msg=traceback.format_exc())
+    ops.create_product(request.json or {})
     return APIResult(0)
 
 
@@ -24,7 +26,4 @@ def add_product():
 @api_wrap
 def get_product():
     item = Product.query.get(request.args.to_dict().get('id', ''))
-    if item:
-        return APIResult(0, item.__dict__)
-    else:
-        return APIResult(1, msg='无此价格')
+    return APIResult(0, item.__dict__) if item else APIResult(0, item.__dict__)
