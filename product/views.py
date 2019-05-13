@@ -26,4 +26,4 @@ def add_product():
 @api_wrap
 def get_product():
     item = Product.query.get(request.args.to_dict().get('id', ''))
-    return APIResult(0, item.__dict__) if item else APIResult(0, item.__dict__)
+    return APIResult(0, item.__dict__) if item else APIResult(1, '无法找到')
