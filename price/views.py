@@ -23,7 +23,7 @@ def add_price():
 
 @price.route("/get_price", methods=["GET"])
 def get_price():
-    item = Price.query.get(id=request.args.to_dict().get('id'))
+    item = Price.query.get(request.args.to_dict().get('id'))
     if item:
         return APIResult(0, item.to_dict())
     else:
