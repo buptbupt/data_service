@@ -14,6 +14,11 @@ def create_product(product_dict):
 def create_product_class(product_class_dict):
     if 'id' in product_class_dict:
         raise '不可包含id字段'
+    if 'product_class_id' in product_class_dict:
+        product_class_obj = ProductClass.query.get(product_class_dict.pop('product_class_id', ''))
+        if not product_class_obj:
+            raise '无法找到分类'
+        product_class_dict['product_class'] = product_class_obj
     product_class_dict['id'] = uuid.uuid1().hex
     db.session.add(ProductClass(**product_class_dict))
     db.session.commit()
