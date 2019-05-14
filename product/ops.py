@@ -6,23 +6,21 @@ from util.db import db
 def create_product(product_dict):
     if 'id' in product_dict:
         raise '不可包含id字段'
-    if 'product_class_id' in product_dict:
-        product_class_obj = ProductClass.query.get(
-            product_dict.pop('product_class_id', ''))
-        if not product_class_obj:
-            raise '无法找到分类'
-        product_dict['product_class'] = product_class_obj
     product_dict['id'] = uuid.uuid1().hex
-    db.session.add(Product(**product_dict))
+    product_obj = Product(**product_dict)
+    db.session.add(product_obj)
     db.session.commit()
+    return product_obj
 
 
 def create_product_class(product_class_dict):
     if 'id' in product_class_dict:
         raise '不可包含id字段'
     product_class_dict['id'] = uuid.uuid1().hex
-    db.session.add(ProductClass(**product_class_dict))
+    product_class_obj = ProductClass(**product_class_dict)
+    db.session.add(product_class_obj)
     db.session.commit()
+    return product_class_obj
 
 
 def list_product(args):
