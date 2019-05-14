@@ -8,7 +8,8 @@ class Product(db.Model):
     product_code = db.Column(db.String(32), index=True, unique=True)
     product_price = db.Column(db.JSON)
     product_status = db.Column(db.String(32))
-    product_class = db.Column(db.String(32), db.ForeignKey('product_class.id'))
+    product_class_id = db.Column(db.String(32), 
+                                 db.ForeignKey('product_class.id'))
     created = db.Column(db.DateTime, default=datetime.datetime.utcnow)
     lut = db.Column(db.DateTime, default=datetime.datetime.utcnow,
                     onupdate=datetime.datetime.utcnow)
@@ -33,8 +34,7 @@ class ProductClass(db.Model):
     product_class_name = db.Column(db.JSON)
     product_class_level = db.Column(db.Integer)
     product_list = db.relationship(
-        'Product', backref='product', lazy='dynamic')
-
+        'Product', backref='product_class', lazy='dynamic')
     product_class_parent_id = db.Column(
         db.String(32), db.ForeignKey('product_class.id'))
     children = db.relationship(
