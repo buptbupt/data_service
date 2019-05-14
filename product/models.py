@@ -10,7 +10,8 @@ class Product(db.Model):
     product_status = db.Column(db.String(32))
     product_class = db.Column(db.String(32), db.ForeignKey('product_class.id'))
     created = db.Column(db.DateTime, default=datetime.datetime.utcnow)
-    lut = db.Column(db.DateTime, default=datetime.datetime.utcnow, onupdate=datetime.datetime.utcnow)
+    lut = db.Column(db.DateTime, default=datetime.datetime.utcnow,
+                    onupdate=datetime.datetime.utcnow)
 
     def __repr__(self):
         return '<Product %r>' % self.product_name
@@ -22,7 +23,8 @@ class Product(db.Model):
             product_code=self.product_code,
             product_price=self.product_price,
             product_status=self.product_status,
-            product_class=self.product_class and self.product_class.product_class_name
+            product_class=self.product_class and
+            self.product_class.product_class_name
         )
 
 
