@@ -4,6 +4,7 @@ from flask import request, Blueprint
 from product import ops
 from product.models import Product
 from util.api import APIResult, api_wrap
+from util.cache import cache
 
 product = Blueprint("product", __name__)
 
@@ -21,7 +22,7 @@ def add_product():
     ops.create_product(request.json or {})
     return APIResult(0)
 
-
+@cache.cached(5)
 @product.route("/get_product", methods=["GET"])
 @api_wrap
 def get_product():
