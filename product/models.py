@@ -6,7 +6,7 @@ class Product(db.Model):
     id = db.Column(db.String(32), primary_key=True)
     product_name = db.Column(db.JSON)
     product_code = db.Column(db.String(32), index=True, unique=True)
-    product_price = db.Column(db.ARRAY)
+    product_price = db.Column(db.JSON)
     product_status = db.Column(db.String(32))
     product_class_id = db.Column(db.String(32),
                                  db.ForeignKey('product_class.id'))
