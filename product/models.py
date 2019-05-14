@@ -15,7 +15,8 @@ class Product(db.Model):
                     onupdate=datetime.datetime.utcnow)
 
     def __repr__(self):
-        return '<Product %r>' % self.product_name
+        return '<Product %r>' % self.product_name.get('chinese') or \
+            self.product_name.get('english')
 
     def to_dict(self):
         return dict(
@@ -42,4 +43,5 @@ class ProductClass(db.Model):
     created = db.Column(db.DateTime, default=datetime.datetime.utcnow)
 
     def __repr__(self):
-        return '<ProductClass %r>' % self.product_class_name
+        return '<ProductClass %r>' % self.product_class_name.get('chinese') or \
+            self.product_class_name.get('english')
