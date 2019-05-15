@@ -11,9 +11,6 @@ def get_product_info(args):
     if 'product_code' in args:
         product_obj = Product.query.filter_by(
             product_code=args.get('product_code', '')).first()
-    if 'key_words' in args:
-        product_obj = Product.query.filter_by(
-            key_words=args.get('key_words', '')).first()
     if not product_obj:
         raise '未找到产品'
     return product_obj.to_dict()
