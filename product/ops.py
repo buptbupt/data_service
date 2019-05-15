@@ -2,6 +2,7 @@ import uuid
 from product.models import Product, ProductClass
 from util.db import db
 from util.check import check_create_obj_dict
+from util.search import get_search_list
 
 
 def get_product_info(args):
@@ -47,6 +48,11 @@ def _check_create_product(product_dict):
 def _create_product_obj(product_dict):
     product_dict['id'] = uuid.uuid1().hex
     product_obj = Product(**product_dict)
+    product_obj.search_list = get_search_list(cut_list=[
+        product_obj.product_name
+    ], not_cut_list=[
+        product_obj.product_code
+    ])
     db.session.add(product_obj)
     db.session.commit()
     return product_obj
