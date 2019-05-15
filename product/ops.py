@@ -32,7 +32,7 @@ def list_product(args):
     limit = int(args.pop('limit', 10))
     query = Product.query
     if 'key_words' in args:
-        query = query.filter(Product.search_list.contains(
+        query = query.filter(Product.search_list.any(
             args.pop('key_words', '')))
     query = query.order_by(Product.product_code)
     for item in query.all()[offset:offset+limit]:
