@@ -1,5 +1,6 @@
 from util.db import db
 
+
 class Price(db.Model):
     id = db.Column(db.String(32), primary_key=True)
     
