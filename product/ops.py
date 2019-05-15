@@ -30,8 +30,12 @@ def list_product(args):
     res = []
     offset = int(args.pop('offset', 0))
     limit = int(args.pop('limit', 10))
-    for item in Product.query.filter_by(**args).order_by(db.desc(
-            Product.created)).all()[offset:offset+limit]:
+    query = Product.query
+    if 'key_words' in args:
+        query = query.filter(Product.search_list.contains(
+            args.pop('key_words', '')))
+    query = query.order_by(Product.product_code)
+    for item in query.all()[offset:offset+limit]:
         res.append(item.to_dict())
     return res
 
