@@ -3,6 +3,7 @@ from app import app
 from util.db import db
 from product.models import Product, ProductClass
 from product.ops import create_product, create_product_class
+from util.search import get_search_list
 
 db.drop_all(app=app)
 db.create_all(app=app)
@@ -43,7 +44,12 @@ def init_product(num):
             product_code='P{:0>6d}'.format(i),
             product_status="测试状态",
             product_price=[['03:00', 4.2], ['12:00', 3.9], ['20:30', 7.1]],
-            product_class_id=random.choice(product_class_id_list)
+            product_class_id=random.choice(product_class_id_list),
+            search_list=get_search_list(cut_list=[
+                '测试产品{:0>2d}'.format(i)
+            ], not_cut_list=[
+                'P{:0>6d}'.format(i)
+            ])
         ))
 
 

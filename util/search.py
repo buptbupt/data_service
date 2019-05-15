@@ -1,0 +1,12 @@
+import jieba
+
+
+def get_search_list(cut_list=[], not_cut_list=[]):
+    res = []
+    for text in cut_list:
+        lcut = jieba.lcut(text)
+        for p in range(len(lcut)):
+            for n in range(3):
+                res.append(''.join(lcut[p:p+n+1]))
+    res.extend(not_cut_list)
+    return list(set(res))
