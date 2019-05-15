@@ -22,6 +22,7 @@ def add_product():
     ops.create_product(request.json or {})
     return APIResult(0)
 
+
 @cache.cached(5)
 @product.route("/get_product", methods=["GET"])
 @api_wrap
