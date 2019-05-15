@@ -31,8 +31,8 @@ def create_product_class(product_class_dict):
 
 def list_product(args):
     res = []
-    offset = args.get('offset', 0)
-    limit = args.get('limit', 10)
+    offset = int(args.get('offset', 0))
+    limit = int(args.get('limit', 10))
     for item in Product.query.order_by(db.desc(
             Product.created)).all()[offset:offset+limit]:
         res.append(item.to_dict())
