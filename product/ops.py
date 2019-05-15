@@ -4,6 +4,21 @@ from util.db import db
 from util.check import check_create_obj_dict
 
 
+def get_product_info(args):
+    product_obj = None
+    if 'id' in args:
+        product_obj = Product.query.get(args.get('id', ''))
+    if 'product_code' in args:
+        product_obj = Product.query.filter_by(
+            product_code=args.get('product_code', '')).first()
+    if 'key_words' in args:
+        product_obj = Product.query.filter_by(
+            key_words=args.get('key_words', '')).first()
+    if not product_obj:
+        raise '未找到产品'
+    return product_obj.to_dict()
+
+
 def create_product(product_dict):
     _check_create_product(product_dict)
     return _create_product_obj(product_dict)
@@ -16,7 +31,10 @@ def create_product_class(product_class_dict):
 
 def list_product(args):
     res = []
-    for item in Product.query.limit(args.pop('num', 10)):
+    offset = args.get('offset', 0)
+    limit = args.get('limit', 10)
+    for item in Product.query.order_by(db.desc(
+            Product.created)).all()[offset:offset+limit]:
         res.append(item.to_dict())
     return res
 

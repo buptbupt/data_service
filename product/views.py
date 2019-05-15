@@ -27,5 +27,5 @@ def add_product():
 @product.route("/get_product", methods=["GET"])
 @api_wrap
 def get_product():
-    item = Product.query.get(request.args.to_dict().get('id', ''))
-    return APIResult(0, item.to_dict()) if item else APIResult(1, '无法找到')
+    res = ops.get_product_info(request.args.to_dict() or {})
+    return APIResult(0, res)
