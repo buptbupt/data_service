@@ -10,6 +10,7 @@ class Product(db.Model):
     product_status = db.Column(db.String(32))
     product_class_id = db.Column(db.String(32),
                                  db.ForeignKey('product_class.id'))
+    search_list = db.Column(db.ARRAY(db.String), index=True)
     created = db.Column(db.DateTime, default=datetime.datetime.utcnow)
     lut = db.Column(db.DateTime, default=datetime.datetime.utcnow,
                     onupdate=datetime.datetime.utcnow)
