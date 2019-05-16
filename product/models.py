@@ -8,7 +8,7 @@ class Product(db.Model):
     product_code = db.Column(db.String(32), index=True, unique=True)
     product_price = db.Column(db.JSON)
     product_status = db.Column(db.String(32))
-    product_class_id = db.Column(db.String(32),
+    product_class_id = db.Column(db.String(32), index=True,
                                  db.ForeignKey('product_class.id'))
     search_list = db.Column(db.ARRAY(db.String), index=True)
     created = db.Column(db.DateTime, default=datetime.datetime.utcnow)
