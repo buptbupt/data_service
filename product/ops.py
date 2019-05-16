@@ -8,7 +8,7 @@ from util.search import get_search_list
 
 @cache.memoize(timeout=10)
 def get_product_tree(limit=10):
-    root = ProductClass.query.filter(product_class_level=1).one()
+    root = ProductClass.query.filter_by(product_class_level=1).one()
     return recursive_product_class_node(root, limit)
 
 
