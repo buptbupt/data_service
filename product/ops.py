@@ -13,7 +13,10 @@ def get_product_tree(limit=10):
 
 
 def recursive_product_class_node(node, limit):
-    res = {'product_list': []}
+    res = {
+        'product_list': [], 
+        'product_class_name': node.product_class_name
+    }
     for product in node.product_list.order_by(
             Product.product_code).all()[:limit]:
         res['product_list'].append(product.brief())
