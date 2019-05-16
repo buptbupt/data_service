@@ -23,7 +23,7 @@ def _recursive_product_class_node(node, limit):
     if node.children:
         res['children'] = []
         for child in node.children:
-            res['children'].append(recursive_product_class_node(child, limit))
+            res['children'].append(_recursive_product_class_node(child, limit))
     return res
 
 
