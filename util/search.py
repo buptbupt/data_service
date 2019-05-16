@@ -2,7 +2,7 @@ import jieba
 
 
 def get_search_list(cut_list=[], not_cut_list=[]):
-    res = []
+    res = cut_list
     for text in cut_list:
         lcut = jieba.lcut(text)
         for p in range(len(lcut)):
