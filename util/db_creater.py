@@ -48,4 +48,4 @@ def init_product(num):
     db.session.commit()
 
 
-init_product(20)
+init_product(2000)
