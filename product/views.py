@@ -30,6 +30,7 @@ def get_product():
     res = ops.get_product_info(request.args.to_dict() or {})
     return APIResult(0, res)
 
+
 @product.route("/get_product_tree", methods=["GET"])
 @api_wrap
 def get_product():
