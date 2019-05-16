@@ -19,6 +19,13 @@ class Product(db.Model):
         return '<Product %r>' % self.product_name.get('chinese') or \
             self.product_name.get('english')
 
+    def brief(self):
+        return dict(
+            id=self.id,
+            product_name=self.product_name,
+            product_code=self.product_code,
+        )
+
     def to_dict(self):
         return dict(
             id=self.id,
@@ -34,7 +41,7 @@ class Product(db.Model):
 class ProductClass(db.Model):
     id = db.Column(db.String(32), primary_key=True)
     product_class_name = db.Column(db.JSON)
-    product_class_level = db.Column(db.Integer)
+    product_class_level = db.Column(db.Integer, index=True)
     product_list = db.relationship(
         'Product', backref='product_class', lazy='dynamic')
     product_class_parent_id = db.Column(

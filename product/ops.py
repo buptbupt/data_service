@@ -1,8 +1,27 @@
 import uuid
 from product.models import Product, ProductClass
 from util.db import db
+from util.cache import cache
 from util.check import check_create_obj_dict
 from util.search import get_search_list
+
+
+@cache.memoize(timeout=10)
+def get_product_tree(limit=10):
+    root = ProductClass.query.filter(product_class_level=1).one()
+    return recursive_product_class_node(root, limit)
+
+
+def recursive_product_class_node(node, limit):
+    res = {'product_list': []}
+    for product in node.product_list.order_by(
+            Product.product_code).all()[:limit]:
+        res['product_list'].append(product.brief())
+    if node.children:
+        res['children'] = []
+        for child in node.children:
+            res['children'].append(recursive_product_class_node(child, limit))
+    return res
 
 
 def get_product_info(args):
