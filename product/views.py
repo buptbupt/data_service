@@ -33,7 +33,7 @@ def get_product():
 
 @product.route("/get_product_tree", methods=["GET"])
 @api_wrap
-def get_product():
+def get_product_tree():
     limit = int(request.args.to_dict().get('limit', 10))
     res = ops.get_product_tree(limit)
     return APIResult(0, res)
