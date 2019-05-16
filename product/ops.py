@@ -22,6 +22,11 @@ def create_product(product_dict):
     return _create_product_obj(product_dict)
 
 
+def create_product_without_save(product_dict):
+    _check_create_product(product_dict)
+    return _create_product_obj(product_dict, save=False)
+
+
 def create_product_class(product_class_dict):
     _check_create_product_class(product_class_dict)
     return _create_product_class_obj(product_class_dict)
@@ -45,7 +50,7 @@ def _check_create_product(product_dict):
     check_create_obj_dict(product_dict)
 
 
-def _create_product_obj(product_dict):
+def _create_product_obj(product_dict, save=True):
     product_dict['id'] = uuid.uuid1().hex
     product_obj = Product(**product_dict)
     product_obj.search_list = get_search_list(cut_list=[
@@ -54,7 +59,8 @@ def _create_product_obj(product_dict):
         product_obj.product_code
     ])
     db.session.add(product_obj)
-    db.session.commit()
+    if save:
+        db.session.commit()
     return product_obj
 
 

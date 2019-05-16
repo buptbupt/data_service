@@ -2,7 +2,7 @@ import random
 from app import app
 from util.db import db
 from product.models import Product, ProductClass
-from product.ops import create_product, create_product_class
+from product.ops import create_product_without_save, create_product_class
 
 db.drop_all(app=app)
 db.create_all(app=app)
@@ -35,7 +35,7 @@ init_product_class(5)
 
 def init_product(num):
     for i in range(num):
-        create_product(dict(
+        create_product_without_save(dict(
             product_name={
                 'chinese': '测试产品{:0>2d}'.format(i),
                 'english': 'test_product_{:0>2d}'.format(i)
@@ -45,6 +45,7 @@ def init_product(num):
             product_price=[['03:00', 4.2], ['12:00', 3.9], ['20:30', 7.1]],
             product_class_id=random.choice(product_class_id_list)
         ))
+    db.session.commit()
 
 
 init_product(20)
