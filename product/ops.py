@@ -54,7 +54,7 @@ def _create_product_obj(product_dict, save=True):
     product_dict['id'] = uuid.uuid1().hex
     product_obj = Product(**product_dict)
     product_obj.search_list = get_search_list(
-        cut_list=(product_obj.product_name or {}).items(), 
+        cut_list=list((product_obj.product_name or {}).values()),
         not_cut_list=[product_obj.product_code])
     db.session.add(product_obj)
     if save:
