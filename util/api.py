@@ -18,6 +18,7 @@ class APIResult(dict):
     def __call__(self, *arg, **kw):
         return self.jsonify()
 
+
 class api_wrap(object):
 
     def __init__(self, func):

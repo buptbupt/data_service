@@ -17,7 +17,7 @@ def init_product_class(num):
         product_class_name={'chinese': '全部', 'english': 'all'},
         product_class_level=1
     ))
-    product_class_id_list.append(root_class.id)
+    product_class_id_list.append()
     for i in range(num):
         node_class = create_product_class(dict(
             product_class_name={
