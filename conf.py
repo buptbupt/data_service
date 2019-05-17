@@ -8,3 +8,6 @@ CACHE_CONFIG = {
     "CACHE_REDIS_DB": 0,
     "CACHE_REDIS_PASSWORD": "",
 }
+
+# CACHE_CONFIG = {'CACHE_TYPE': 'simple'}
+# SQLALCHEMY_DATABASE_URI = 'sqlite:///foo.db'

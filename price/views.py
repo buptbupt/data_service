@@ -12,5 +12,6 @@ price_ws = Blueprint("price_ws", __name__)
 def input_price(socket):
     while not socket.closed:
         data = socket.receive()
+        ops.price_data_mapper(data)
         socket.send(json.dumps({'code': 0, 'msg': 'success', 'data':{}}))
 
