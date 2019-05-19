@@ -42,5 +42,5 @@ def get_product_tree():
 @product.route("/test_celery", methods=["GET"])
 @api_wrap
 def test_celery():
-    ops.test_celery((request.args.to_dict() or {}).get('test', ''))
+    ops.test_celery.delay((request.args.to_dict() or {}).get('test', ''))
     return APIResult(0, msg='已添加任务')
