@@ -4,6 +4,12 @@ from util.db import db
 from util.cache import cache
 from util.check import check_create_obj_dict
 from util.search import get_search_list
+from util.celery import celery
+
+
+@celery.task()
+def test_celery(s):
+    print(s)
 
 
 @cache.memoize(timeout=10)
