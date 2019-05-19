@@ -15,9 +15,6 @@ logging.basicConfig(level=logging.INFO, filename='app.log')
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = SQLALCHEMY_DATABASE_URI
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-app.config.update(
-    **CELERY_CONFIG
-)
 sockets = Sockets(app)
 cache.init_app(app)
 Compress(app)
