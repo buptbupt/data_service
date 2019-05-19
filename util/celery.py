@@ -2,7 +2,7 @@ from flask import Flask
 from celery import Celery
 from conf import CELERY_CONFIG
 
-celery = Celery()
+celery = Celery(__name__, broker=CELERY_CONFIG['CELERY_BROKER_URL'])
 celery.conf.update(**CELERY_CONFIG)
 
 
