@@ -1,8 +1,11 @@
 import time
 import websocket
 import _thread as thread
+from app import app
+from util.db import db
 from price.input.ops import *
 from price.input.sina import to_dict as sina_to_dict
+
 
 
 def on_sina_message(ws, message):
@@ -29,6 +32,8 @@ def on_open(ws):
 
 
 if __name__ == "__main__":
+    app.app_context().push()
+    db.init_app(app)
     websocket.enableTrace(True)
     ws = websocket.WebSocketApp("wss://hq.sinajs.cn/wskt?list=sh000001",
                                 on_message=on_sina_message,
