@@ -1,5 +1,8 @@
+import pytz
 import datetime
 from decimal import Decimal
+
+local = pytz.timezone("Asia/Shanghai")
 
 
 def to_dict(message):
@@ -32,8 +35,12 @@ def to_dict(message):
                  'selling_number_1', 'selling_number_2', 'selling_number_3',
                  'selling_number_4', 'selling_number_5']:
             res[k] = int(v)
-    res['price_date'] = datetime.datetime.strptime(
-        res['price_date'], '%Y-%m-%d')
+    price_time = datetime.datetime.strptime(
+        res['price_date'] + " " + res['price_time'], "%Y-%m-%d %H:%M:%S")
+    local_dt = local.localize(price_time, is_dst=None)
+    utc_dt = local_dt.astimezone(pytz.utc)
+    res['price_date'] = str(utc_dt)[:10]
+    res['price_time'] = str(utc_dt)[11:19]
     res['create_time'] = datetime.datetime.now()
     res['source'] = 'sina'
     return res
