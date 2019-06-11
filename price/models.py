@@ -38,7 +38,7 @@ class Price(db.Model):
     price_date = db.Column(db.DATE())
     price_time = db.Column(db.TIME())
     status = db.Column(db.String(32))
-    create_time = db.Column(db.DATETIME())
+    create_time = db.Column(db.DateTime())
 
     def __repr__(self):
         return '<Price %r>' % self.id
