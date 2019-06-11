@@ -17,6 +17,7 @@ def to_dict(message):
         'selling_number_4', 'selling_price_4', 'selling_number_5',
             'selling_price_5', 'price_date', 'price_time', 'status']):
         res[k] = message[i]
+    res['product_code'] = res['product_abbr_name'].split('=')[0]
     res['product_abbr_name'] = res['product_abbr_name'].split('=')[-1]
     for k, v in res.items():
         if k in ['today_opening_price', 'yesterday_closing_price'
