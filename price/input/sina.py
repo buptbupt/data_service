@@ -34,4 +34,5 @@ def to_dict(message):
     res['price_date'] = datetime.datetime.strptime(
         res['price_date'], '%Y-%m-%d')
     res['create_time'] = datetime.datetime.now()
+    res['source'] = 'sina'
     return res
