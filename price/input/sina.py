@@ -5,6 +5,14 @@ from decimal import Decimal
 local = pytz.timezone("Asia/Shanghai")
 
 
+product_list = [
+    'sh000001', 'sh000002', 'sh000003',
+    'sh000004', 'sh000005', 'sh000006',
+    'sh000007', 'sh000008', 'sh000009',
+    'sh000010', 'sh000011', 'sh000012',
+]
+
+
 def to_dict(message):
     res = {}
     message = message.split(',')
