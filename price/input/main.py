@@ -32,7 +32,10 @@ def on_open(ws):
     thread.start_new_thread(run, ())
 
 
-def get_sina_data(product_code, db):
+def get_sina_data(product_code):
+    app.app_context().push()
+    db.init_app(app)
+    websocket.enableTrace(True)
     ws = websocket.WebSocketApp(
         "wss://hq.sinajs.cn/wskt?list={}".format(product_code),
         on_message=on_sina_message,
@@ -43,10 +46,7 @@ def get_sina_data(product_code, db):
 
 
 if __name__ == "__main__":
-    app.app_context().push()
-    db.init_app(app)
-    websocket.enableTrace(True)
     for product_code in sina_product_list:
         new_thread = threading.Thread(
-            target=get_sina_data, args=(product_code, db,))
+            target=get_sina_data, args=(product_code,))
         new_thread.start()
