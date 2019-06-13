@@ -14,9 +14,9 @@ product_list = [
 
 
 def product_list_gen():
-    for i in range(2):
+    for i in range(50):
         yield 'sh%06d' % (i)
-    for i in range(0):
+    for i in range(10000):
         yield 'sh6%05d' % (i)
 
 
