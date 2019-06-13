@@ -11,4 +11,4 @@ def create_price_obj(price_dict, save=True):
     db.session.add(price_obj)
     if save:
         db.session.commit()
-    return price_obj
+    return price_obj.id
