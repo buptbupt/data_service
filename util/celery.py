@@ -34,7 +34,7 @@ class FlaskCelery(Celery):
         self.config_from_object(app.config)
 
 
-celery = FlaskCelery()
+celery = FlaskCelery(__name__, broker=CELERY_CONFIG['CELERY_BROKER_URL'])
 # celery = Celery(__name__, broker=CELERY_CONFIG['CELERY_BROKER_URL'])
 celery.conf.update(**CELERY_CONFIG)
 
