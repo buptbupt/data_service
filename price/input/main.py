@@ -6,10 +6,12 @@ from app import app
 from util.db import db
 from price.input.ops import *
 from price.input.sina import to_dict as sina_to_dict
-from price.input.sina import product_list as sina_product_list
+from price.input.sina import product_list_gen as sina_product_gen
 
 
 def on_sina_message(ws, message):
+    if ',' not in message:
+        ws.close()
     price_dict = sina_to_dict(message)
     create_price_obj(price_dict)
 
@@ -46,7 +48,8 @@ def get_sina_data(product_code):
 
 
 if __name__ == "__main__":
-    for product_code in sina_product_list:
+    for product_code in sina_product_gen():
         new_thread = threading.Thread(
             target=get_sina_data, args=(product_code,))
         new_thread.start()
+        time.sleep(0.01)

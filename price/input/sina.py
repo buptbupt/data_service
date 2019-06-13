@@ -13,6 +13,13 @@ product_list = [
 ]
 
 
+def product_list_gen():
+    for i in range(50):
+        yield 'sh%06d' % (i)
+    for i in range(100000):
+        yield 'sh6%05d' % (i)
+
+
 def to_dict(message):
     res = {}
     message = message.split(',')
