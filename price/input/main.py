@@ -4,7 +4,7 @@ import threading
 import _thread as thread
 from app import app
 from util.db import db
-from price.input.ops import *
+from price.input.ops import create_price_obj
 from price.input.sina import to_dict as sina_to_dict
 from price.input.sina import product_list_gen as sina_product_gen
 
