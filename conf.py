@@ -20,5 +20,6 @@ else:
 
     CELERY_CONFIG = dict(
         CELERY_BROKER_URL='redis://172.17.0.2:6379/1',
-        CELERY_RESULT_BACKEND='redis://172.17.0.2:6379/1'
+        CELERY_RESULT_BACKEND='redis://172.17.0.2:6379/1',
+        CELERY_IMPORTS=['price']
     )
