@@ -1,8 +1,7 @@
-from flask import Flask
+import flask
 from celery import Celery
 from conf import CELERY_CONFIG
-from util.db import db
-from conf import *
+
 
 class FlaskCelery(Celery):
 
