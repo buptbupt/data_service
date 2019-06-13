@@ -19,7 +19,7 @@ else:
     }
 
     CELERY_CONFIG = dict(
-        broker='redis://172.17.0.2:6379/1'
+        broker='redis://172.17.0.2:6379/1',
         CELERY_BROKER_URL='redis://172.17.0.2:6379/1',
         CELERY_RESULT_BACKEND='redis://172.17.0.2:6379/1',
         CELERY_IMPORTS=['price.input.main']
