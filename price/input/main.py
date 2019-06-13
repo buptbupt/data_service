@@ -13,7 +13,7 @@ def on_sina_message(ws, message):
     if ',' not in message:
         ws.close()
     price_dict = sina_to_dict(message)
-    create_price_obj(price_dict, db)
+    create_price_obj(price_dict, ws.db)
 
 
 def on_error(ws, error):
@@ -40,6 +40,7 @@ def get_sina_data(product_code, db):
         on_message=on_sina_message,
         on_error=on_error,
         on_close=on_close)
+    ws.db = db
     ws.on_open = on_open
     ws.run_forever()
 
