@@ -13,7 +13,7 @@ def on_sina_message(ws, message):
     if ',' not in message:
         ws.close()
     price_dict = sina_to_dict(message)
-    create_price_obj(price_dict, ws.db)
+    create_price_obj.delay(price_dict)
 
 
 def on_error(ws, error):
@@ -34,23 +34,20 @@ def on_open(ws):
     thread.start_new_thread(run, ())
 
 
-def get_sina_data(product_code, db):
+def get_sina_data(product_code):
     ws = websocket.WebSocketApp(
         "wss://hq.sinajs.cn/wskt?list={}".format(product_code),
         on_message=on_sina_message,
         on_error=on_error,
         on_close=on_close)
-    ws.db = db
     ws.on_open = on_open
     ws.run_forever()
 
 
 if __name__ == "__main__":
-    app.app_context().push()
-    db.init_app(app)
     websocket.enableTrace(True)
     for product_code in sina_product_gen():
         new_thread = threading.Thread(
-            target=get_sina_data, args=(product_code, db, ))
+            target=get_sina_data, args=(product_code,))
         new_thread.start()
         time.sleep(0.01)
